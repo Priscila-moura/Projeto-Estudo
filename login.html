@@ -1,0 +1,17 @@
+<div id="loginCard" class="auth-card">
+      <h2>Acessar Mercearia</h2>
+      <form class="auth-form" onsubmit="handleLogin(event)">
+        <div class="input-group">
+          <label for="loginUser">E-mail ou CPF</label>
+          <input type="text" id="loginUser" placeholder="exemplo@email.com ou 123.456.789-00" required>
+        </div>
+        <div class="input-group">
+          <label for="loginPass">Senha</label>
+          <input type="password" id="loginPass" placeholder="Sua senha" required>
+        </div>
+        <button type="submit" class="auth-btn">Entrar</button>
+      </form>
+      <div class="toggle-auth">
+        Nao tem uma conta? <span onclick="toggleAuthMode('signup')">Cadastre-se</span>
+      </div>
+    </div>
