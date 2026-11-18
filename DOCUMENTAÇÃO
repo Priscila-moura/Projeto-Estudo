@@ -232,4 +232,8 @@ Primeiro acesso? Clique em Cadastre-se, preencha seu E-mail/CPF, crie uma senha 
  Pacote de entrega (.zip ou repositório Git): Deve conter código-fonte + README.md + CHANGELOG.md + pasta /docs (com requisitos, script .sql e manual do usuário).
 
 ## Glossário
-CHANGELOG: Arquivo que registra cronologicamente todas as mudanças, correções e novas funcionalidades de cada versão de um software.DDL (Data Definition Language): Subconjunto de comandos SQL (CREATE, ALTER, DROP) usados para definir a estrutura do banco de dados.DOM (Document Object Model): Representação em árvore dos elementos HTML que permite ao JavaScript alterar estilos e conteúdos dinamicamente (como ocorre em switchTab).   PHPDoc: Padrão formal de comentários em blocos (/** ... */) usado no PHP para documentar classes, funções, parâmetros e retornos.SPA (Single Page Application): Aplicação web que carrega uma única página HTML (index.html) e atualiza o conteúdo exibido dinamicamente sem recarregar o navegador.
+CHANGELOG: Arquivo que registra cronologicamente todas as mudanças, correções e novas funcionalidades de cada versão de um software.
+DDL (Data Definition Language): Subconjunto de comandos SQL (CREATE, ALTER, DROP) usados para definir a estrutura do banco de dados.
+DOM (Document Object Model): Representação em árvore dos elementos HTML que permite ao JavaScript alterar estilos e conteúdos dinamicamente (como ocorre em switchTab).  
+PHPDoc: Padrão formal de comentários em blocos (/** ... */) usado no PHP para documentar classes, funções, parâmetros e retornos.SPA (Single Page Application): 
+Aplicação web que carrega uma única página HTML (index.html) e atualiza o conteúdo exibido dinamicamente sem recarregar o navegador.
