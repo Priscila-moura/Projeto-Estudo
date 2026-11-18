@@ -214,6 +214,13 @@ Primeiro acesso? Clique em Cadastre-se, preencha seu E-mail/CPF, crie uma senha 
  fix: Correção de bug (ex.: fix: limpa campos de senha ao executar handleLogout)  
  style: Ajustes de CSS/layout (ex.: style: ajusta paleta verde em --accent-gold)   
  docs: Atualização de documentação (ex.: docs: adiciona dicionário de dados MySQL)
+
+## Montando o pacote final (essencial)
+Integridade de caminhos: Verificar se style.css e img/Projeto.ico estão referenciados corretamente no <head> do index.html
+Limpeza de código duplicado: Note que os arquivos
+contêm trechos que já estão embutidos dentro de index.html. Documentar no README.md que os arquivos separados são módulos de referência ou removê-los se não forem carregados dinamicamente.
+Revisão ortográfica de interface: Corrigir acentuação em textos visíveis ao usuário (ex.: "Endereco" → "Endereço", "Horario" → "Horário", "MACA" → "MAÇÃ", "Feijao" → "Feijão")
+Pacote de entrega (.zip ou repositório Git): Deve conter código-fonte + README.md + CHANGELOG.md + pasta /docs (com requisitos, script .sql e manual do usuário).
  
  ## CHANGELOG.md
 
