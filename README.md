@@ -40,9 +40,9 @@ Passos detalhados em `docs/instalacao.md`.
 - Banco de dados: `docs/banco-de-dados.md`
 - Manual do usuário: `docs/manual-usuario.md`
 ## Equipe
-- Ana Souza — back-end (PHP)
-- Bruno Lima — banco de dados
-- Carla Mendes — front-end e documentação
+- Priscila  — back-end (PHP)
+- Priscila — banco de dados
+- Priscila — front-end e documentação
 Projeto do curso técnico em Desenvolvimento de Sistemas —
 ETE Porto Digital, 2026.
 
@@ -68,6 +68,54 @@ Modelagem de Banco e Código (SQL /PHPDoc)       Desenvolvedores Back-end       
 
 Documentação de Telas e Fluxos                   Designers UI/UX e QA (Testadores)              Mapear estados de interface e interações nos cards.
 
-Manual do Usuário                              Operadores e Clientes da Mercearia                Ensinar como fazer login, navegar pelas abas e consultar o estoque sem termos técnicos
+## Requisitos, regras de negócio e histórias de usuário (essencial)
+
+Requisitos Funcionais Controle de Acesso: O sistema deve bloquear a visualização da aplicação principal até que o usuário realize login ou cadastro.
+
+Alternância de Autenticação: O usuário deve poder alternar entre os formulários de Login e Cadastro na mesma tela.
+
+Navegação por Abas: O sistema deve permitir navegar entre Home, Dashboard, Produtos, Sobre e Contato, além de encerrar a sessão (Sair)
+
+Visualização de Estoque por Categoria: Ao passar o cursor sobre um card no Dashboard, o sistema deve exibir os itens em estoque daquela categoria.
+
+## Requisitos Não Funcionais 
+Interface Responsiva: O grid do dashboard deve se adaptar automaticamente a diferentes larguras de tela.  
+Identidade Visual: Utilizar tema escuro com destaque em verde.
+
+## Regras de Negócio
+
+Campos Obrigatórios: Tanto o login quanto o cadastro exigem preenchimento de E-mail ou CPF e Senha.
+Limpeza de Sessão: Ao clicar em Sair, todos os campos de formulário devem ser limpos antes de retornar à tela de login.
+Horário de Funcionamento: O atendimento físico informado é de Segunda a Sábado, das 07h às 19h.
+
+## Histórias de Usuário
+
+Como cliente da mercearia, quero visualizar os produtos separados por categorias no Dashboard, para encontrar rapidamente frutas, cereais ou laticínios disponíveis em estoque
+Como visitante, quero acessar a aba Contato para verificar o telefone/WhatsApp (81) 3044-0655 e o endereço no Bairro do Recife antes de ir à loja
+
+## Documentando o banco de dados MySQL (essencial)
+
+Como o projeto atual possui dados estáticos no HTML, abaixo está a modelagem relacional recomendada para evoluir o sistema para persistência em MySQL:
+
+Tabela: usuarios
+Coluna     id      identificador   senha_hash     criado_em 
+Tipo      INT      VARCHAR(100)    VARCHAR(255)   DATETIME
+Restrições   PK, AUTO_INCREMENT   NOT NULL, UNIQUE  NOT NULL      DEFAULT CURRENT_TIMESTAMP
+Descrição    Identificador único do usuário   E-mail ou CPF utilizado no login.   Data e hora do cadastro.
+
+Tabela: categorias
+Coluna    id    nome        icone
+Tipo      INT   VARCHAR(60)    VARCHAR(20)  
+Restrições  PK, AUTO_INCREMENT   NOT NULL   NULL
+Descrição   Identificador da categoria.   Nome da categoria (ex.: FRUTAS, CEREAIS). Emoji ou classe de ícone exibido no card
+
+
+Tabela: produtos
+
+Coluna   id     categoria_id     nome             em_estoque
+Tipo     INT       INT            VARCHAR(100)       TINYINT(1)
+Restrições  PK, AUTO_INCREMENT   FK -> categorias(id)   NOT NULL    DEFAULT 1
+Descrição  Identificador do produto.   Categoria à qual o produto pertence.  Nome do item (ex.: Queijo Coalho, Arroz) 1 = Disponível, 0 = Indisponível.
+
 
 
