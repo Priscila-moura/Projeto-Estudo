@@ -33,7 +33,7 @@ celular e retira no balcão, sem fila no intervalo.
 Passos detalhados em `docs/instalacao.md`.
 
 ## Usuário de teste
-- E-mail: aluno@teste.com
+- E-mail: cliente@teste.com
 - Senha: 123456
 ## Documentação
 - Requisitos: `docs/requisitos.md`
