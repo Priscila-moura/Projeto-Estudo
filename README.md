@@ -118,4 +118,166 @@ Restrições  PK, AUTO_INCREMENT   FK -> categorias(id)   NOT NULL    DEFAULT 1
 Descrição  Identificador do produto.   Categoria à qual o produto pertence.  Nome do item (ex.: Queijo Coalho, Arroz) 1 = Disponível, 0 = Indisponível.
 
 
+CREATE TABLE pedidos (
+    id_pedido INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_cupom INT NULL,
+    data_pedido DATETIME NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
+    FOREIGN KEY (id_cupom) REFERENCES cupons(id_cupom)
+);
+CREATE TABLE itens_pedido (
+    id_item INT AUTO_INCREMENT PRIMARY KEY,
+    id_pedido INT NOT NULL,
+    id_produto INT NOT NULL,
+    quantidade INT NOT NULL,
+    preco_unitario DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido),
+    FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
+);
 
+
+## Comentários e PHPDoc no código PHP (essencial)
+
+Padrão de documentação PHPDoc para integrar o formulário de login
+<?php
+/**
+ * Controlador de Autenticação do Sistema Mercearia.
+ *
+ * Responsável por validar credenciais de acesso (E-mail ou CPF)
+ * e iniciar a sessão do usuário.
+ *
+ * @package    Mercearia\Auth
+ * @author     Equipe de Desenvolvimento
+ * @version    1.0.0
+ */
+
+/**
+ * Autentica um usuário com base no identificador (E-mail ou CPF) e senha.
+ *
+ * @param PDO    $pdo           Instância ativa de conexão com o MySQL.
+ * @param string $identificador E-mail ou CPF informado no campo #loginUser.
+ * @param string $senha         Senha em texto plano informada no campo #loginPass.
+ *
+ * @return array{sucesso: bool, mensagem: string, usuario_id?: int} Resultado da autenticação.
+ * @throws PDOException Caso ocorra falha na consulta ao banco de dados.
+ */
+function autenticarUsuario(PDO $pdo, string $identificador, string $senha): array
+{
+    // Remove espaços extras do identificador
+    $identificador = trim($identificador);
+
+    $stmt = $pdo->prepare('SELECT id, senha_hash FROM usuarios WHERE identificador = :id LIMIT 1');
+    $stmt->execute([':id' => $identificador]);
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$usuario || !password_verify($senha, $usuario['senha_hash'])) {
+        return [
+            'sucesso'  => false,
+            'mensagem' => 'E-mail/CPF ou senha inválidos.'
+        ];
+    }
+
+    return [
+        'sucesso'    => true,
+        'mensagem'   => 'Login realizado com sucesso!',
+        'usuario_id' => (int) $usuario['id']
+    ];
+}
+## Documentando telas, rotas e fluxos
+
+Como a aplicação opera, as rotas são controladas pelas funções JavaScript
+Estado Inicial #loginCard (padrão).
+Estado Autenticado Exibe banner promocional "COMPRE RAPIDO"
+Exibe 3 cards interativos (FRUTAS, CEREAIS, Laticinios & Queijos).
+Exibe listagem corrida dos 12 itens cadastrados
+Exibe histórico da mercearia desde a década de 2000.
+Exibe telefone, e-mail, endereço e horário.
+
+
+## Fluxograma de Navegação       
+[Acesso ao index.html]
+         │
+         ▼
+  ┌──────────────┐   toggleAuthMode('signup')   ┌───────────────┐
+  │  Login Card  │ ◄──────────────────────────► │  Signup Card  │
+  └──────┬───────┘                              └───────┬───────┘
+         │ handleLogin()                                │ handleSignup()
+         └──────────────────────┬───────────────────────┘
+                                ▼
+                    [ enterApp() - Home Tab ]
+                                │
+        ┌───────────┬───────────┼───────────┬───────────┐
+        ▼           ▼           ▼           ▼           ▼
+   [Dashboard] [Produtos]   [Sobre]    [Contato]   [Sair (Logout)]
+                                                        │
+                                                        ▼
+                                              [Limpa inputs e retorna
+                                               ao Login Card]
+## Guia de instalação e execução (essencial)
+
+Pré-requisitos Qualquer navegador web moderno (Google Chrome, Mozilla Firefox, Microsoft Edge ou Safari).
+
+(Opcional) Servidor local como VS Code Live Server, XAMPP ou PHP Built-in Server.
+
+
+## Passo a Passo para Execução
+
+Baixe ou clone os arquivos do projeto mantendo todos no mesmo diretório raiz:
+Demais arquivos HTML e pasta.
+
+Execução Direta (Modo Estático):
+Dê um duplo clique no arquivo index.html para abri-lo diretamente no navegador padrão.
+
+Execução via Servidor Local (Recomendado):
+
+Bash
+php -S localhost:8000
+
+Acesse http://localhost:8000 no navegador.
+
+## Manual do usuário
+
+Como entrar no sistema
+Ao abrir o sistema, você verá a tela Acessar Mercearia
+Digite seu E-mail ou CPF e sua Senha.
+Clique no botão verde Entrar.
+Primeiro acesso? Clique em Cadastre-se, preencha seu E-mail/CPF, crie uma senha e clique em Cadastrar e Entrar.
+
+ Como consultar produtos por categoria
+ No menu superior, clique na opção Dashboard.  
+ Você verá três cartões: Frutas, Cereais e Laticínios & Queijos.  
+ Passe o mouse sobre o cartão desejado para abrir automaticamente a lista de produtos disponíveis em estoque naquela categoria.
+
+ Como ver todos os produtos e informações da loja
+
+ Clique em Produtos no menu superior para ver a lista completa de itens em uma única tela.  
+ Clique em Sobre para conhecer a história da mercearia ou em Contato para ver o WhatsApp (81) 3044-0655 e o endereço no Bairro do Recife.   
+ Para encerrar seu acesso com segurança, clique no botão vermelho Sair no canto superior direito.   
+
+ ## Versionamento, commits e CHANGELOG
+
+ Padrão de Commits (Conventional Commits)
+ feat: Nova funcionalidade (ex.: feat: adiciona modal de cadastro de usuário)  
+ fix: Correção de bug (ex.: fix: limpa campos de senha ao executar handleLogout)  
+ style: Ajustes de CSS/layout (ex.: style: ajusta paleta verde em --accent-gold)   
+ docs: Atualização de documentação (ex.: docs: adiciona dicionário de dados MySQL)
+ 
+ ## CHANGELOG.md
+
+ [1.0.0] - 2026-11-18
+   ### Adicionado
+- Tela de autenticação com alternância entre Login e Cadastro (`#authOverlay`).
+- Navegação SPA com 5 seções: Home, Dashboard, Produtos, Sobre e Contato.
+- Cards interativos com efeito hover no Dashboard para exibição de estoque.
+- Estilização completa em tema escuro (`style.css`).
+
+## Montando o pacote final (essencial)
+ Integridade de caminhos: Verificar se style.css e img/Projeto.ico estão referenciados corretamente no <head> do index.html. 
+ Limpeza de código duplicado: Note que os arquivos login.html, dashboard.html, produto.html, sobre.html e contato.html contêm trechos que já estão embutidos dentro de index.html.
+ Documentar no README.md que os arquivos separados são módulos de referência ou removê-los se não forem carregados dinamicamente.  
+ Revisão ortográfica de interface: Corrigir acentuação em textos visíveis ao usuário (ex.: "Endereco" → "Endereço", "Horario" → "Horário", "MACA" → "MAÇÃ", "Feijao" → "Feijão"). 
+ Pacote de entrega (.zip ou repositório Git): Deve conter código-fonte + README.md + CHANGELOG.md + pasta /docs (com requisitos, script .sql e manual do usuário).
+
+## Glossário
+CHANGELOG: Arquivo que registra cronologicamente todas as mudanças, correções e novas funcionalidades de cada versão de um software.DDL (Data Definition Language): Subconjunto de comandos SQL (CREATE, ALTER, DROP) usados para definir a estrutura do banco de dados.DOM (Document Object Model): Representação em árvore dos elementos HTML que permite ao JavaScript alterar estilos e conteúdos dinamicamente (como ocorre em switchTab).   PHPDoc: Padrão formal de comentários em blocos (/** ... */) usado no PHP para documentar classes, funções, parâmetros e retornos.SPA (Single Page Application): Aplicação web que carrega uma única página HTML (index.html) e atualiza o conteúdo exibido dinamicamente sem recarregar o navegador.
