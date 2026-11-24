@@ -21,7 +21,6 @@ if (empty($identificador) || empty($senha)) {
     exit;
 }
 
-// --- CADASTRO ---
 if ($acao === 'cadastro') {
     if (strlen($senha) < 4) {
         echo json_encode([
