@@ -1,4 +1,3 @@
-
 CREATE DATABASE mercearia ;
 USE mercearia;
 
