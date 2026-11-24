@@ -34,7 +34,7 @@ Passos detalhados em `docs/instalacao.md`.
 
 ## Usuário de teste
 - E-mail: cliente@teste.com
-- Senha: 123456
+- Senha: 1234
 ## Documentação
 - Requisitos: `docs/requisitos.md`
 - Banco de dados: `docs/banco-de-dados.md`
