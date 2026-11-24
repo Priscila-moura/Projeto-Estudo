@@ -52,7 +52,7 @@ foreach ($todosProdutos as $prod) {
       border: 1px solid #368f1b;
     }
 
-    /* Tabelas */
+   
     .tabela-produtos, .tabela-usuarios {
       width: 100%;
       margin: 20px auto;
@@ -83,7 +83,7 @@ foreach ($todosProdutos as $prod) {
       font-weight: bold;
     }
 
-    /* Módulo de Usuários (Sprint 01) */
+   
     .usuarios-layout {
       display: grid;
       grid-template-columns: 360px 1fr;
@@ -160,7 +160,7 @@ foreach ($todosProdutos as $prod) {
       font-weight: bold;
     }
 
-    /* Modal de Confirmação (Ponto 09) */
+  
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -276,7 +276,7 @@ foreach ($todosProdutos as $prod) {
     </header>
 
     <main>
-      <!-- HOME -->
+     
       <section id="home" class="tab-content active">
         <div class="hero-banner">
           <h1>COMPRE RAPIDO</h1>
